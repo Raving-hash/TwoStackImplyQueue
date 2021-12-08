@@ -1,45 +1,34 @@
-import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
 
 class CQueue {
-    private Deque<Integer> dq1 = new ArrayDeque<>();
-    private Deque<Integer> dq2 = new ArrayDeque<>();
+    private Deque<Integer> dq1 ;
+    private Deque<Integer> dq2 ;
     public CQueue() {
-
+        dq1 = new LinkedList<>();
+        dq2 = new LinkedList<>();
     }
 
     public void appendTail(int value) {
-        if (dq1.isEmpty()) {
-            dq2.push(value);
-        } else {
-            dq1.push(value);
-        }
+      dq1.push(value);
     }
+
     public int deleteHead() {
-        int  res;
-        if(dq1.isEmpty() && dq2.isEmpty()){
-            return -1;
-        }
-        if(dq1.isEmpty()){
-            reverse();
-            res = dq1.pop();
+        if(dq2.isEmpty()){
+           reverse();
         }else{
-            reverse();
-            res = dq2.pop();
+            return dq2.pop();
         }
-        reverse();
-        return res;
+        if(dq2.isEmpty()){
+            return -1;
+        }else{
+            return dq2.pop();
+        }
     }
 public void reverse() {
-    if (dq1.isEmpty()) {
-        while (!dq2.isEmpty()) {
-            dq1.push(dq2.pop());
-        }
-    } else {
         while (!dq1.isEmpty()) {
             dq2.push(dq1.pop());
         }
-    }
 }
 
     public static void main(String[] args) {
